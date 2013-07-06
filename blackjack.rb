@@ -1,5 +1,4 @@
 #blackjack
-
 def calculate_total(cards) 
   #[['2', 'Hearts']]
   arr = cards.map{|e| e[0] }
@@ -13,26 +12,22 @@ def calculate_total(cards)
       total += value.to_i
     end
   end
-
-  #ace adjustment
+#ace adjustment
    arr.select{|e| e == "Ace"}.count.times do
      total -= 10 if total > 21
   end
-
   total
 end
 
 puts
 puts 'Welcome to a game of Blackjack'
 puts
-#create deck
 deck = []
 suits = [' of Hearts', ' of Diamonds', ' of Clubs', ' of Spades']
 cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
 deck = cards.product(suits)
 deck.shuffle!
 
-#deal cards
 playerhand = []
 dealerhand = []
 playerhand << deck.pop
@@ -44,9 +39,12 @@ playertotal = calculate_total(playerhand)
 dealertotal = calculate_total(dealerhand)
 
 puts "Your cards are: " + playerhand.to_s + " for a total of: " + playertotal.to_s
+if playertotal == 21
+  puts "Congratulations, you hit blackjack! You win!"
+  exit
+end
 puts "The dealer is showing " + dealerhand[0].to_s
 puts
-
 
 #hit or stay loop
 hit_or_stay = 'hit'
@@ -64,7 +62,6 @@ hit_or_stay = gets.chomp
   end
 end
 
-# bust
 if playertotal.to_i > 21
   puts 'Sorry, you busted.'
 end
@@ -76,7 +73,6 @@ while dealertotal.to_i < 17 && playertotal.to_i < 22
   puts "The dealer cards are now: " + dealerhand.to_s + " for a total of: " + dealertotal.to_s
 end
 
-#scoring results
 puts "The dealer total is " + dealertotal.to_s + " and your total is " + playertotal.to_s
 if (playertotal.to_i > dealertotal.to_i && playertotal.to_i < 22) || playertotal.to_i < 22 && dealertotal.to_i > 22
   puts 'Congratulations, you win!'
