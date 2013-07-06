@@ -1,4 +1,4 @@
 blackjack
 =========
 
-My simple blackjack gam
+My simple blackjack game
